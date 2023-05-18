@@ -3,7 +3,6 @@
  */
 
 #include <glib.h>
-#include <stdlib.h>
 
 #ifndef POLYGRINDER_C_IMPROVEMENTS_H
 #define POLYGRINDER_C_IMPROVEMENTS_H

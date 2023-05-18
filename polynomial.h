@@ -3,9 +3,7 @@
  * 2023-05-12
  */
 
-#include <math.h>
 #include <complex.h>
-#include <stdio.h>
 
 #ifndef POLYGRINDER_POLYNOMIAL_H
 #define POLYGRINDER_POLYNOMIAL_H
