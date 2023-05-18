@@ -4,6 +4,8 @@
  */
 
 #include "polynomial.h"
+#include <math.h>
+#include <stdio.h>
 
 /**
  *

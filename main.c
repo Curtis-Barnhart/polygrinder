@@ -6,10 +6,13 @@
  */
 
 #include <string.h>
+#include <stdio.h>
+#include <glib.h>
+#include <math.h>
 
 #include "main.h"
-
 #include "c_improvements.h"
+#include "polynomial.h"
 
 /**
  *
