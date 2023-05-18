@@ -3,9 +3,10 @@
  * 2023-05-12
  */
 
-#include "polynomial.h"
 #include <math.h>
 #include <stdio.h>
+
+#include "polynomial.h"
 
 /**
  *
