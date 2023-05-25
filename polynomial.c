@@ -33,6 +33,43 @@ double eval(poly *p, complex double value) {
 }
 
 /**
+ * scan_radius (probably) finds the first local minimum of the modulus of the polynomial p on the ring around the origin
+ * determined by radius after the point (start, radius) where start is an angle in radians.
+ *
+ * @param p polynomial to scan for local minimum
+ * @param radius radius of the ring to scan the polynomial over
+ * @param start angle in radians to start scanning from
+ * @param grain precision to use when scanning for local minimum - lower grain means there is a chance minimum might not
+ *              be discovered if they are within grain of each other
+ * @return theta value such that [theta, theta + grain] contains a local minimum
+ */
+double scan_radius(poly *p, double radius, double start, double grain) {
+    double MY_TAU = TAU + grain;  // Overshoot a little to make sure we get the last segment
+    double delta0_1, delta1_2, input1, input2;
+
+    // Calculate the slope *before* the current slope so we can tell if, off the bat, we are at a local minimum
+    input1 = start - grain;
+    input2 = start;
+    delta0_1 = slope(p, input1, input2, radius);
+    input1 = input2;
+    input2 += grain;
+
+    while (input1 < MY_TAU) {  // Evaluate through a full circle
+        delta1_2 = slope(p, input1, input2, radius);  // Slope of current segment
+        if (delta0_1 < 0 && delta1_2 > 0) {  // If the slope goes from negative to positive there's a local minimum
+            return input1;
+        }
+
+        // Calculate new segment and move the most recent slope into the past slope
+        delta0_1 = delta1_2;
+        input1 = input2;
+        input2 += grain;
+    }
+
+    return -1;  // If no minimums between start and the end, return -1
+}
+
+/**
  *
  * @param p
  * @param start
@@ -40,12 +77,12 @@ double eval(poly *p, complex double value) {
  * @return
  */
 double scan(poly *p, double start, double grain) {
-	double TAU = (M_PI + grain) * 2;
+	double MY_TAU = (M_PI + grain) * 2;
 	double delta_last, delta_current, input_next;
     input_next = start + grain;
 	delta_current = eval(p, TTOC(input_next)) - eval(p, TTOC(start));
 
-	while (start < TAU) {
+	while (start < MY_TAU) {
         start = input_next;
         input_next += grain;
 		delta_last = delta_current;
