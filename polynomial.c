@@ -6,9 +6,10 @@
 #include "polynomial.h"
 
 /**
+ * eval evaluates the modulus of a polynomial p at complex value value.
  *
- * @param p
- * @param value
+ * @param p polynomial to evaluate
+ * @param value complex point at which to evaluate p
  * @return
  */
 double eval(poly *p, complex double value) {
@@ -137,8 +138,9 @@ double global_min(poly *p, double grain, int iter) {
 }
 
 /**
+ * prints out a string representation of a polynomial
  *
- * @param p
+ * @param p polynomial to print
  */
 void poly_print(poly *p) {
     for (int i = p->degree; i > -1; i--) {
@@ -170,9 +172,11 @@ void poly_print(poly *p) {
 //}
 
 /**
+ * set_sign copies the bits of an unsigned long into the signs field of a polynomial.
+ * It assumes that the least significant bit corresponds to the sign on the constant term of the polynomial.
  *
- * @param p
- * @param signs
+ * @param p polynomial to set the signs of
+ * @param signs bits of the unsigned long signs will be copied into the signs field of the polynomial
  */
 void set_sign(poly *p, unsigned long signs) {
     int signBytes = (p->degree / 8) + 1;
