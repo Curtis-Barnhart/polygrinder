@@ -23,6 +23,8 @@ double scan(poly *, double, double);
 
 double local_min_newton(poly *p, double start);
 
+double local_min_custom(poly *, double, double, int);
+
 double global_min(poly *, double, int);
 
 void poly_print(poly *p);

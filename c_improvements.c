@@ -51,8 +51,6 @@ void DoubleTracker_increment(DoubleTracker *tracker, double key) {
     }
 }
 
-//void DoubleTracker_decrement(DoubleTracker *, double);
-
 unsigned int DoubleTracker_read(DoubleTracker *tracker, double key) {
     unsigned int *where = g_tree_lookup(tracker->tree, &key);
     if (where == NULL) {

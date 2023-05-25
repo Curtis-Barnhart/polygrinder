@@ -18,8 +18,6 @@ DoubleTracker *DoubleTracker_new(GCompareFunc, unsigned int);
 
 void DoubleTracker_increment(DoubleTracker *, double);
 
-//void DoubleTracker_decrement(DoubleTracker *, double);
-
 unsigned int DoubleTracker_read(DoubleTracker *, double);
 
 void DoubleTracker_destroy(DoubleTracker *);
