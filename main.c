@@ -94,7 +94,7 @@ void degree_mins_verbose(int degree, double grain, int iter, unsigned int bucket
 int main() {
     for (int i = 0; i < 25; ++i) {
         char filename[12];
-        sprintf(filename, "polyfile%d\n", i);
+        sprintf(filename, "polyfile%d", i);
         FILE *f = fopen(filename, "w");
         degree_mins_verbose(i, 0.02, 16, 5000000, f);
         fclose(f);
