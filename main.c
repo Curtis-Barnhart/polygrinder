@@ -91,7 +91,12 @@ void degree_mins_verbose(int degree, double grain, int iter, unsigned int bucket
  *
  * @return
  */
-int main() {
+int main(int argc, char **argv) {
+    if (argc > 1) {
+        testing();
+        return 1;
+    }
+
     for (int i = 0; i < 25; ++i) {
         char filename[12];
         sprintf(filename, "polyfile%d", i);
@@ -100,4 +105,13 @@ int main() {
         fclose(f);
         printf("file %s written\n", filename);
     }
+}
+
+/**
+ *
+ * @return
+ */
+int testing() {
+
+    return 1;
 }

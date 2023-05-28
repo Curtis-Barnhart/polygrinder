@@ -16,6 +16,8 @@ gboolean tree_val_file_printer(gpointer, gpointer, gpointer);
 
 void degree_mins_verbose(int, double, int, unsigned int, FILE*);
 
-int main();
+int main(int argc, char **argv);
+
+int testing();
 
 #endif //POLYGRINDER_MAIN_H
