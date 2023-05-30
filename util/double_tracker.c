@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "c_improvements.h"
+#include "double_tracker.h"
 
 DoubleTracker *DoubleTracker_new(GCompareFunc comparator, unsigned int size) {
     DoubleTracker *instance = malloc(sizeof(DoubleTracker));

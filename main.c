@@ -11,14 +11,20 @@
 #include <math.h>
 
 #include "main.h"
-#include "c_improvements.h"
-#include "polynomial.h"
+#include "util/double_tracker.h"
+#include "poly/polynomial.h"
 
 /**
+ * degree_mins finds all polynomials of degree 'degree' whose minimum modulus on the unit circle is greater than 1.
+ * It attempts to group polynomials by their minimum modulus, and counts up how many polynomials have each minimum
+ * modulus as their minimum modulus.
+ * It then prints each unique minimum modulus as well as how many polynomials had that as their minimum modulus.
  *
- * @param degree
- * @param grain
- * @param iter
+ * @param degree degree of polynomials to evaluate
+ * @param grain grain to use when searching for minimum modulus of polynomial (multiple minimums within grain of each
+ *        other may be counted as one)
+ * @param iter iterations to use on minimum finding function when precisely calculating the a local minimum modulus of
+ *        a polynomial
  */
 void degree_mins(int degree, double grain, int iter) {
     unsigned char signs[((degree + 1) / 8) + 1];
@@ -112,6 +118,7 @@ int main(int argc, char **argv) {
  * @return
  */
 int testing() {
+
 
     return 1;
 }

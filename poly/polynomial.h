@@ -3,10 +3,10 @@
  * 2023-05-12
  */
 
-#include <complex.h>
-
 #ifndef POLYGRINDER_POLYNOMIAL_H
 #define POLYGRINDER_POLYNOMIAL_H
+
+#include <complex.h>
 
 #define GET_SIGN(poly, i) ((((poly->signs)[i >> 3] >> (7 - (i & 7))) & 1))
 #define TTOC(c) (cos(c) + I * sin(c))

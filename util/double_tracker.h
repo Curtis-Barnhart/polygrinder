@@ -4,8 +4,8 @@
 
 #include <glib.h>
 
-#ifndef POLYGRINDER_C_IMPROVEMENTS_H
-#define POLYGRINDER_C_IMPROVEMENTS_H
+#ifndef POLYGRINDER_DOUBLE_TRACKER_H
+#define POLYGRINDER_DOUBLE_TRACKER_H
 
 typedef struct {
     GTree *tree;
@@ -23,4 +23,4 @@ unsigned int DoubleTracker_read(DoubleTracker *, double);
 void DoubleTracker_destroy(DoubleTracker *);
 
 
-#endif //POLYGRINDER_C_IMPROVEMENTS_H
+#endif //POLYGRINDER_DOUBLE_TRACKER_H

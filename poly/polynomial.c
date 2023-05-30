@@ -9,9 +9,9 @@
 #include "polynomial.h"
 
 /**
- * eval evaluates the modulus of a polynomial p at complex value value.
+ * eval evaluates the modulus of a poly p at complex value value.
  *
- * @param p polynomial to evaluate
+ * @param p poly to evaluate
  * @param value complex point at which to evaluate p
  * @return
  */
@@ -33,14 +33,14 @@ double eval(poly *p, complex double value) {
 }
 
 /**
- * scan_radius (probably) finds the first local minimum of the modulus of the polynomial p on the ring around the origin
+ * scan_radius (probably) finds the first local minimum of the modulus of the poly p on the ring around the origin
  * determined by radius after the point (start, radius) where start is an angle in radians.
  *
- * @param p polynomial to scan for local minimum
- * @param radius radius of the ring to scan the polynomial over
+ * @param p poly to scan for local minimum
+ * @param radius radius of the ring to scan the poly over
  * @param start angle in radians to start scanning from
  * @param grain precision to use when scanning for local minimum - lower grain means there is a chance minimum might not
- *              be discovered if they are within grain of each other
+ *        be discovered if they are within grain of each other
  * @return theta value such that [theta, theta + grain] contains a local minimum
  */
 double scan_radius(poly *p, double radius, double start, double grain) {
@@ -178,9 +178,9 @@ double global_min(poly *p, double grain, int iter) {
 }
 
 /**
- * prints out a string representation of a polynomial
+ * prints out a string representation of a poly
  *
- * @param p polynomial to print
+ * @param p poly to print
  */
 void poly_print(poly *p) {
     for (int i = p->degree; i > -1; i--) {
@@ -212,11 +212,11 @@ void poly_print(poly *p) {
 //}
 
 /**
- * set_sign copies the bits of an unsigned long into the signs field of a polynomial.
- * It assumes that the least significant bit corresponds to the sign on the constant term of the polynomial.
+ * set_sign copies the bits of an unsigned long into the signs field of a poly.
+ * It assumes that the least significant bit corresponds to the sign on the constant term of the poly.
  *
- * @param p polynomial to set the signs of
- * @param signs bits of the unsigned long signs will be copied into the signs field of the polynomial
+ * @param p poly to set the signs of
+ * @param signs bits of the unsigned long signs will be copied into the signs field of the poly
  */
 void set_sign(poly *p, unsigned long signs) {
     int signBytes = (p->degree / 8) + 1;
