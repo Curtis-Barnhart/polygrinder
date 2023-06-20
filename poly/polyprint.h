@@ -7,12 +7,7 @@
 
 #include "polynomial.h"
 
-typedef enum {
-    NORMAL,
-    EULER
-} poly_str_mode;
-
-static int str_size(poly *, poly_str_mode);
+static int str_size(poly *);
 
 char *poly_str(poly *);
 

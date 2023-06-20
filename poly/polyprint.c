@@ -11,28 +11,45 @@
  * @param mode whether the polynomial is being represented using 'z' as the term or with the Euler formula 'e^(ix)'.
  * @return
  */
-static int str_size(poly *p, poly_str_mode mode) {
-    int term_size;  // length of 'z' or '(e^(ix))' depending on mode
+static int str_size(poly *p) {
+    int term_size = 2;  // length of 'z^*'
+    int length;
     int degree = p->degree;
-    int first_sign = GET_SIGN(p, degree) - 1;  // sign = 0 (negative) -> -1, sign = 1 (positive) -> 0
+    int first_sign = 1 - GET_SIGN(p, degree);  // sign = 0 (negative) -> 1, sign = 1 (positive) -> 0
 
-    switch (mode) {
-        case NORMAL:
-            term_size = 1;
-        case EULER:
-            term_size = 8;
-    }
 
     switch (degree) {
         case 0:
             return 1 + first_sign;  // Just a '1' with a possible '-' in front
         case 1:
-            return 2 + term_size + first_sign;  // First term needs no exponent
+            // "-z + 1" or "z + 1" = 6/5
+            return 3 + term_size + first_sign - (mode == NORMAL);  // First term needs no exponent
         default:
-            for (int i = 0; i < ; ++i) {  // 2**9 < max int value
+            length = 3 + term_size + first_sign - (mode == NORMAL);  // Value of last two terms
+            degree -= 2;  // from now on degree will track how many terms are remaining to be accounted for
 
+            int exp_len = 1;
+            int num_fit = 9;
+            degree -= 8;
+            if (degree > 0) {
+                length += 8 * (3 + term_size + exp_len);  // 8 terms of exp_len 1
+            } else {
+                length += (8 + degree) * (3 + term_size + exp_len);  // whatever the degree was terms of exp_len 1
+                return length;
+            }
+
+            while (exp_len++ < 7) {  // 10**9 < max int value
+                num_fit *= 10;  // amount of exponents that have length exp_len
+
+                if ((degree -= num_fit) > 0) {
+                    length += num_fit * (3 + term_size + exp_len);
+                } else {
+                    length += (num_fit + degree) * (3 + term_size + exp_len);
+                    return length;
+                }
             }
     }
+    return -1;  // If the exponent had so many terms it doesn't fit (which isn't possible), return a -1
 }
 
 /**
@@ -49,19 +66,6 @@ char *poly_str_cp(poly *p, char *buffer) {
 }
 
 /**
- * poly_str_euler_cp transforms a polynomial into a human readable string written in terms of Euler's formula
- * (eg (e^(ix))^3 + (e^(ix))^2 - e^(ix) - 1) and copies the string into the given buffer (with no null terminator).
- * Returns the length of the string.
- *
- * @param p
- * @param buffer
- * @return the length of the string
- */
-char *poly_str_euler_cp(poly *p, char *buffer) {
-
-}
-
-/**
  * poly_str returns a null terminated string giving a human readable representation of a polynomial (in the same form as
  * poly_str_cp).
  *
@@ -69,16 +73,5 @@ char *poly_str_euler_cp(poly *p, char *buffer) {
  * @return pointer to the string
  */
 char *poly_str(poly *p) {
-
-}
-
-/**
- * poly_str_euler returns a null terminated string giving a human readable representation of a polynomial (in the same
- * form as poly_str_euler_cp)
- *
- * @param p polynomial to represent
- * @return pointer to the string
- */
-char *poly_str_euler(poly *p) {
 
 }

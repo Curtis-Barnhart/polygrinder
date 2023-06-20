@@ -134,8 +134,7 @@ double local_min_newton(poly *p, double start) {
  * @return
  */
 double local_min_custom(poly *p, double start, double grain, int depth) {
-    double x_vals[5];
-    double y_vals[5];
+    double x_vals[5], y_vals[5];
     int smallest = 0;
     for (int i = 0; i < 5; ++i) {
         x_vals[i] = start + (i * grain / 4);

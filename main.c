@@ -11,8 +11,9 @@
 #include <math.h>
 
 #include "main.h"
-#include "util/double_tracker.h"
 #include "poly/polynomial.h"
+#include "util/double_tracker.h"
+#include "util/my_math.h"
 
 /**
  * degree_mins finds all polynomials of degree 'degree' whose minimum modulus on the unit circle is greater than 1.
@@ -99,8 +100,7 @@ void degree_mins_verbose(int degree, double grain, int iter, unsigned int bucket
  */
 int main(int argc, char **argv) {
     if (argc > 1) {
-        testing();
-        return 1;
+        return testing();
     }
 
     for (int i = 0; i < 25; ++i) {
@@ -114,11 +114,21 @@ int main(int argc, char **argv) {
 }
 
 /**
+ * Just a place to run test code.
+ * If any command line arguments are passed to the program, it will run the testing function instead of main.
  *
  * @return
  */
 int testing() {
+    printf("%ld\n", ipow(7, 12));
 
+    int error = 0;
+    printf("%ld\n", ipow_safe(7, 12, &error));
+    printf("%d\n", error);
+
+    error = 0;
+    printf("%ld\n", ipow_safe(7, 120, &error));
+    printf("%d\n", error);
 
     return 1;
 }
