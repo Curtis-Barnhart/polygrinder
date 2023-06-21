@@ -9,8 +9,8 @@
 
 static int str_size(poly *);
 
-char *poly_str(poly *);
+char *poly_str_cp(poly *, char *);
 
-char *poly_str_real(poly *);
+char *poly_str(poly *);
 
 #endif //POLYGRINDER_POLYPRINT_H

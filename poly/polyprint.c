@@ -4,6 +4,9 @@
 
 #include "polyprint.h"
 
+// length of "z^"
+#define TERM_SIZE (2)
+
 /**
  * str_size returns the size that a string returned by poly_str would be (not including the null terminator).
  *
@@ -12,8 +15,7 @@
  * @return
  */
 static int str_size(poly *p) {
-    int term_size = 2;  // length of 'z^*'
-    int length;
+    int length;  // Total length of string
     int degree = p->degree;
     int first_sign = 1 - GET_SIGN(p, degree);  // sign = 0 (negative) -> 1, sign = 1 (positive) -> 0
 
@@ -23,18 +25,18 @@ static int str_size(poly *p) {
             return 1 + first_sign;  // Just a '1' with a possible '-' in front
         case 1:
             // "-z + 1" or "z + 1" = 6/5
-            return 3 + term_size + first_sign - (mode == NORMAL);  // First term needs no exponent
+            return 3 + first_sign;  // First term needs no exponent
         default:
-            length = 3 + term_size + first_sign - (mode == NORMAL);  // Value of last two terms
-            degree -= 2;  // from now on degree will track how many terms are remaining to be accounted for
+            length = 3 + first_sign;  // Value of last two terms and first sign
+            degree -= 1;  // from now on degree will track how many terms are remaining to be accounted for
 
             int exp_len = 1;
             int num_fit = 9;
             degree -= 8;
             if (degree > 0) {
-                length += 8 * (3 + term_size + exp_len);  // 8 terms of exp_len 1
+                length += 8 * (3 + TERM_SIZE + exp_len);  // 8 terms of exp_len 1
             } else {
-                length += (8 + degree) * (3 + term_size + exp_len);  // whatever the degree was terms of exp_len 1
+                length += (8 + degree) * (3 + TERM_SIZE + exp_len);  // whatever the degree was terms of exp_len 1
                 return length;
             }
 
@@ -42,9 +44,9 @@ static int str_size(poly *p) {
                 num_fit *= 10;  // amount of exponents that have length exp_len
 
                 if ((degree -= num_fit) > 0) {
-                    length += num_fit * (3 + term_size + exp_len);
+                    length += num_fit * (3 + TERM_SIZE + exp_len);
                 } else {
-                    length += (num_fit + degree) * (3 + term_size + exp_len);
+                    length += (num_fit + degree) * (3 + TERM_SIZE + exp_len);
                     return length;
                 }
             }
